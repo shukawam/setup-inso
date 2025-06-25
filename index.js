@@ -17,7 +17,9 @@ async function action() {
   let compression = getCompression(process.platform);
 
   if (os == "linux") {
-    os = os + "-" + arch;
+    if (semver.lte(semverVersion, "11.1.0")) {
+      os = os + "-" + arch;
+    }
   }
 
   const fullVersion = `${os}-${semverVersion}`;

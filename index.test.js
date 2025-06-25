@@ -32,6 +32,7 @@ describe("version parsing", () => {
     ["1.7.0", "linux-x64-1.7.0"],
     ["1.6.4", "linux-x64-1.6.4"],
     ["1.8.0-beta2", "linux-x64-1.8.0-beta2"],
+    ["11.2.0", "linux-11.2.0"]
   ];
 
   test.each(cases)(
