@@ -16,8 +16,10 @@ async function action() {
   let arch = getArch();
   let compression = getCompression(process.platform);
 
+  const targetVersion = "11.1.0"
+
   if (os == "linux") {
-    if (semver.lte(semverVersion, "11.1.0")) {
+    if (semver.lte(semverVersion, targetVersion)) {
       os = os + "-" + arch;
     }
   }
@@ -28,7 +30,9 @@ async function action() {
   let insoDirectory = tc.find("inso", fullVersion);
   if (!insoDirectory) {
     if (os == "linux") {
-      os = os + "-" + arch;
+      if (semver.lte(semverVersion, targetVersion)) {
+        os = os + "-" + arch;
+      }
     }
     const versionUrl = `https://github.com/Kong/insomnia/releases/download/core%40${semverVersion}/inso-${fullVersion}.${compression}`;
     const insoPath = await tc.downloadTool(versionUrl);
